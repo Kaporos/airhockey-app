@@ -1,0 +1,20 @@
+{
+  "android": {
+    "debug": {
+      "keystore": "C:/Users/Theo/Downloads/android.keystore",
+      "storePassword": "",
+      "alias": "debug",
+      "password" : "android",
+      "keystoreType": "",
+      "packageType": "apk"
+    },
+    "release": {
+      "keystore": "../android.keystore",
+      "storePassword": "",
+      "alias": "mykey2",
+      "password" : "password",
+      "keystoreType": "",
+      "packageType": "bundle"
+    }
+  }
+}
