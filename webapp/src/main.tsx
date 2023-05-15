@@ -36,4 +36,5 @@ declare global {
             write: (deviceId: string, data: string, success: (data: string) => void, failure: (error: any) => void) => void
         }
     }
+
 }

@@ -23,7 +23,7 @@ function App() {
             //This function act like a fake bluetooth device
             //By using receive() method, we can emulate received data from a bluetooth device.
             //69 is to mark end of the message. See Score.tsx for more details
-            window.receive = (d) => {window.from = d+"69"}
+            window.receive = (d) => {window.from = d+"\n"}
             window.bluetoothClassicSerial.register((data) => {
                 if (data && data.input) {
                     //Printing data we sent to the fake bluetooth device using bluetoothClassicSerial.write

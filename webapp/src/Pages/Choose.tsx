@@ -27,10 +27,9 @@ export default function ChoosePage(props: ChooseProps) {
 
         //Called when a new device is discovered !
         window.bluetoothClassicSerial.setDeviceDiscoveredListener((device: Device) => {
-            console.log("New device")
             setDevicesList(devicesList => {
                 //Checking if device already discovered
-                if (devicesList.filter(x => x.name == device.name).length == 0) {
+                if (devicesList.filter(x => x.name == device.name).length == 0 && device.name) {
                     devicesList.push(device)
                 }
 
@@ -39,12 +38,15 @@ export default function ChoosePage(props: ChooseProps) {
             })
         })
 
+        setInterval(() => {
+            window.bluetoothClassicSerial.discoverUnpaired(() => {
+                console.log("End of scan");
+            }, () => {
+                console.log("Couldn't scan")
+            })
+        }, 10000 )
         //Start the scan of devices !
-        window.bluetoothClassicSerial.discoverUnpaired(() => {
-            console.log("End of scan");
-        }, () => {
-            console.log("Couldn't scan")
-        })
+
     }, [])
 
 
@@ -66,9 +68,24 @@ export default function ChoosePage(props: ChooseProps) {
 
     return <>
 
-        {devicesList.map(device => <>
-            <button onClick={() => {connect(device.id)}}>{device.name}</button>
-        </>)}
+        <p>Cliquez sur le Air-Hockey pour vous connecter !</p>
+        <div style={{
+            "display": "flex",
+            "flexDirection": "column",
+            "width": "100%",
+            "height": "100%",
+            "alignItems": "center",
+            "justifyContent": "center"
+        }}>
+
+            {devicesList.map(device => <>
+                <button style={{border: "none", marginTop: "15px", outline: "none", padding: "10px 15px", borderRadius: 5, backgroundColor: "#25CCF7"}} onClick={() => {connect(device.id)}}>{device.name}</button>
+            </>)}
+
+            {devicesList.length > 0 ? <></> : <h3>Scanning...</h3>}
+
+        </div>
+
 
     </>
 }
