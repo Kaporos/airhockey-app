@@ -18,22 +18,22 @@ document.addEventListener("deviceready", () => {
 declare global {
     interface Window {
         cordova: {
-            platformId: "browser" | String
+            platformId: "browser" | "android" | "ios" | String
         },
         currentPlayer: number,
         receive: (data: string) => void,
         from: string,
-        bluetoothClassicSerial: {
-            connect: (deviceId: string, interfaceArray: string, successCallback: (t: any) => void, failedCallback: (error: any) => void) => void,
-            register: (data: (data: any) => void) => void,
-            disconnect: (successCallback: (t: any) => void, failedCallback: (error: any) => void) => void,
-            discoverUnpaired: (successCallback: (t: any) => void, failedCallback: (error: any) => void) => void,
-            enable: (successCallback: (t: any) => void, failedCallback: (error: any) => void) => void,
-            isEnabled: (successCallback: (t: any) => void, failedCallback: (error: any) => void) => void,
-            setDeviceDiscoveredListener: (newDevice: (t: {id: string, name: string}) => void) => void,
-            subscribe: (deviceId: string, separator: string, success: (data: string) => void, failure: (error: any) => void) => void,
-            unsubscribe: (deviceId: string, success: (data: string) => void, failure: (error: any) => void) => void,
-            write: (deviceId: string, data: string, success: (data: string) => void, failure: (error: any) => void) => void
+
+        ble: {
+            isEnabled: (success: () => void, failure: () => void) => void,
+            stopScan: (success: () => void, failure: () => void) => void,
+            isLocationEnabled: (success: () => void, failure: () => void) => void,
+            startLocationStateNotifications: (success: (state: boolean) => void, failure: () => void) => void,
+            enable: (success: () => void, failure: () => void) => void,
+            startScan: (services: string[], success: (device: any) => void, fail: (error: any) => void) => void,
+            connect: (deviceId: string, success: () => void, fail: () => void) => void,
+            read: (deviceId: string,  service_uuid: string, characteristic_uuid: string, success: (buffer: number[]) => void, fail: (error: string) => void) => void,
+
         }
     }
 

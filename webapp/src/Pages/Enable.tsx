@@ -9,7 +9,7 @@ function EnablePrompt(props: EnablePrompt) {
             props.setBluetooth(true)
         }
 
-        window.bluetoothClassicSerial.enable(() => {
+        window.ble.enable(() => {
             props.setBluetooth(true)
         }, () => {})
     }

@@ -25,27 +25,28 @@ export default function ChoosePage(props: ChooseProps) {
             return
         }
 
+
+
+
         //Called when a new device is discovered !
-        window.bluetoothClassicSerial.setDeviceDiscoveredListener((device: Device) => {
+        window.ble.startScan([], (device: Device) => {
             setDevicesList(devicesList => {
+
                 //Checking if device already discovered
-                if (devicesList.filter(x => x.name == device.name).length == 0 && device.name) {
+                if (devicesList.filter(x => x.name == device.name).length == 0 && device.name && device.name.includes("Hockey")) {
                     devicesList.push(device)
                 }
+                //@ts-ignore
+                window.devList = devicesList
 
                 //Creating a new list object to be sure react updates.
                 return [...devicesList]
             })
+        }, () => {
+            alert("Error during scan")
         })
 
-        setInterval(() => {
-            window.bluetoothClassicSerial.discoverUnpaired(() => {
-                console.log("End of scan");
-            }, () => {
-                console.log("Couldn't scan")
-            })
-        }, 10000 )
-        //Start the scan of devices !
+
 
     }, [])
 
@@ -57,9 +58,9 @@ export default function ChoosePage(props: ChooseProps) {
             props.setConnectedDeviceID("la purée c'est cool")
             return
         }
-        //Magic string for android. Don't mind. https://stackoverflow.com/questions/4632524/how-to-find-the-uuid-of-serial-port-bluetooth-device
-        window.bluetoothClassicSerial.connect(deviceId, "00001101-0000-1000-8000-00805F9B34FB", () => {
+        window.ble.connect(deviceId, () => {
             console.log("Connected !")
+            window.ble.stopScan(console.log, console.log)
             props.setConnectedDeviceID(deviceId)
         }, () => {
             alert("Failed to connect. Please try again.")

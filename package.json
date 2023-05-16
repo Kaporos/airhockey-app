@@ -15,7 +15,7 @@
   "devDependencies": {
     "cordova-android": "^10.1.2",
     "cordova-browser": "^6.0.0",
-    "cordova-plugin-bluetooth-classic-serial-port": "^0.9.12",
+    "cordova-plugin-ble-central": "^1.6.3",
     "cordova-plugin-screen-orientation": "^3.0.3",
     "es6-promise-plugin": "^4.2.2"
   },
@@ -25,8 +25,13 @@
       "android"
     ],
     "plugins": {
-      "cordova-plugin-bluetooth-classic-serial-port": {},
-      "cordova-plugin-screen-orientation": {}
+      "cordova-plugin-screen-orientation": {},
+      "cordova-plugin-ble-central": {
+        "BLUETOOTH_USAGE_DESCRIPTION": "Connect to the air hockey !",
+        "IOS_INIT_ON_LOAD": "true",
+        "BLUETOOTH_RESTORE_STATE": "true",
+        "ACCESS_BACKGROUND_LOCATION": "true"
+      }
     }
   }
 }
