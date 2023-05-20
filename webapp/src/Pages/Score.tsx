@@ -21,7 +21,7 @@ export default function ScorePage(props: ScoreProps) {
             }, (error) => {
                 console.log("Failed", error);
             } )
-        }, 1000) //Reading score every second
+        }, 500) //Reading score every half second
 
 
         if (window.cordova.platformId != "browser") {
@@ -32,7 +32,7 @@ export default function ScorePage(props: ScoreProps) {
     }, [])
 
 
-    if (scores[0] == 5 || scores[1] == 5) {
+    if (scores[0] == 254) {
         return <Winner scores={scores}/>
     }
 
